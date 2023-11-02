@@ -26,7 +26,10 @@ public class EmployeeDetachTest {
 
         Employee e2 = em.find(Employee.class, "202301");
         System.out.println("DB에서 가져옴");
-        System.out.println("e1 == e2 ==> " + (e1==e2));
+        System.out.println("e1(준영속) == e2(영속) ==> " + (e1==e2));
+        Employee e3 = em.find(Employee.class, "202301");
+        System.out.println("1차 캐시에서 가져옴");
+        System.out.println("e3(영속) == e2(영속) ==> " + (e3==e2));
 
         System.out.println("====== 커밋 전 ======");
         tx.commit();

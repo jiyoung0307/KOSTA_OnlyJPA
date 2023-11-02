@@ -18,14 +18,14 @@ public class EmployeeFindTest {
         System.out.println("트랜잭션 시작 !!!");
         Employee e1 = em.find(Employee.class, "202301");
         System.out.println("DB에서 가져옴!!");
-        System.out.println("영속상태");
+        System.out.println("영속 상태");
         Employee e2 = em.find(Employee.class, "202301");
         System.out.println("1차 캐시에서 가져옴!!(SQL문이 안나오니까)");
         System.out.println("e1 == e2 ==> " + (e1==e2));
 
         System.out.println("====== 커밋 전 ======");
         tx.commit();
-        System.out.println("====== 커밋 후(DB) ======");
+        System.out.println("====== 커밋 후(DB반영) ======");
         em.close();
         emf.close();
         System.out.println("트랜잭션 종료 !!!");

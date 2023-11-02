@@ -33,7 +33,7 @@ public class EmployeeTest {
         System.out.println("영속 상태");
 
         em.find(Employee.class, "202301");
-        System.out.println("1차 캐시에서 가져옴!! DB는 아직 안나옴!!");
+        System.out.println("1차 캐시에서 가져옴!!(아직 DB 반영 X)");
 
         System.out.println("====== 커밋 전 ======");
         tx.commit();
