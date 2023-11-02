@@ -3,13 +3,13 @@
              xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <!--  EntityManagerFactory 생성 시 사용되는 persistence name -->
-    <persistence-unit name="persistence">
+    <persistence-unit name="hello">
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.password" value="1111"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpaproject?characterEncoding=UTF-8"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpaProject?characterEncoding=UTF-8"/>
 
             <!-- 하이버네이트 사용 시 다른 DB에서 MySQL 문법을 사용 가능하도록 변경.-->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
