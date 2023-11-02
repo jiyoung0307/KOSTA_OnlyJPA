@@ -13,7 +13,7 @@ public class Employee {
     private String empName;
     @Column(name = "dept_id")
     private int deptId;
-    @Column(name = "joinl_date")
+    @Column(name = "join_date")
     private String joinDate;
     private Long salary;
 
