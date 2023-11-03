@@ -9,7 +9,6 @@ import javax.persistence.Persistence;
 
 public class EmployeeFlushTest {
     public static void main(String[] args) {
-//        Entity Manager를 Persistance 객체의 도움을 받아서 생성해보자
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -19,7 +18,7 @@ public class EmployeeFlushTest {
             System.out.println("트랜잭션 시작 !!!");
 
             Employee e1 = em.find(Employee.class, "202301");
-            System.out.println("DB에서 가져옴!!");
+            System.out.println("DB에서 가져옴");
             System.out.println("영속 상태");
 
             System.out.println("수정 전 ==> ");
@@ -27,26 +26,20 @@ public class EmployeeFlushTest {
 
             em.persist(e1);
             System.out.println("수정 후 ==> ");
-
             em.flush();
             System.out.println("flush 직접 호출 ==> ");
-            System.out.println("비어 있는 상태");
-
-
-            System.out.println("====== 커밋 전 ======");
+            System.out.println("커밋 전 ==> ");
             tx.commit();
-            System.out.println("====== 커밋 후 ======");
+            System.out.println("커밋 후 ==> ");
 
             Employee e2 = em.find(Employee.class, "202301");
-            System.out.println("e1 == e2 ? " + (e1 == e2));
+            System.out.println("e1 == e2 ? "+(e1 == e2));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             tx.rollback();
-
         } finally {
             em.close();
             emf.close();
-            System.out.println("트랜잭션 종료 !!!");
         }
     }
 }
