@@ -1,5 +1,6 @@
 package jpajava;
 
+import domain.EmpType;
 import domain.Employee;
 
 import javax.persistence.EntityManager;
@@ -16,7 +17,7 @@ public class EmployeeTest {
         tx.begin();
         try {
             System.out.println("트랜잭션 시작 !!!");
-            Employee emp = new Employee("202301", "test1", 1, null, null);
+            Employee emp = new Employee("202301", "test1", null, EmpType.B, "2023-01-01", 300L);
 //            emp.setEmpId("202301");
 //            emp.setEmpName("홍길동");
 //            emp.setDeptId(1);

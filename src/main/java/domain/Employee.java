@@ -1,21 +1,28 @@
 package domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name="employee")
+@Table(name = "employee")
 public class Employee {
     @Id
-    @Column(name="emp_id", length = 6)
+    @Column(name = "emp_id", length = 6)
     private String empId;
-    @Column(name="emp_name", nullable = false, length = 10)
+    @Column(name = "emp_name", nullable = false, length = 10)
     private String empName;
-    @Column(name="dept_id")
-    private int deptId;
-    @Column(name="join_date", nullable = false, length = 10)
+//    @Column(name="dept_id")
+//    private int deptId;
+
+//    일대다 관계
+//    단방향 관계(Department <- Employee)
+    @ManyToOne
+    @JoinColumn(name = "dept_id")
+    private Department department;
+
+    @Enumerated(EnumType.STRING)
+    private EmpType empType;
+
+    @Column(name = "join_date", nullable = false, length = 10)
     private String joinDate;
     @Column(nullable = false)
     private Long salary;
@@ -23,12 +30,17 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String empId, String empName, int deptId, String joinDate, Long salary) {
+    public Employee(String empId, String empName, Department department, EmpType empType,
+                    String joinDate, Long salary) {
         this.empId = empId;
         this.empName = empName;
-        this.deptId = deptId;
+        this.department = department;
         this.joinDate = joinDate;
         this.salary = salary;
+        this.empType = empType;
+    }
+
+    public Employee(String number, String test1, int i, int deptId, EmpType empType, String date, long l) {
     }
 
     public void setEmpId(String empId) {
@@ -47,12 +59,12 @@ public class Employee {
         this.empName = empName;
     }
 
-    public int getDeptId() {
-        return deptId;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDeptId(int deptId) {
-        this.deptId = deptId;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public String getJoinDate() {
@@ -69,5 +81,13 @@ public class Employee {
 
     public void setSalary(Long salary) {
         this.salary = salary;
+    }
+
+    public EmpType getEmpType() {
+        return empType;
+    }
+
+    public void setEmpType(EmpType empType) {
+        this.empType = empType;
     }
 }

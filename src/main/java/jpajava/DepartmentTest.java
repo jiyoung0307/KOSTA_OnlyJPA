@@ -1,5 +1,7 @@
 package jpajava;
 
+import domain.Department;
+import domain.EmpType;
 import domain.Employee;
 
 import javax.persistence.EntityManager;
@@ -7,7 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class EmployeeFlushTest {
+public class DepartmentTest {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
         EntityManager em = emf.createEntityManager();
@@ -16,24 +18,18 @@ public class EmployeeFlushTest {
         tx.begin();
         try {
             System.out.println("트랜잭션 시작 !!!");
+            Department dept = new Department();
+            dept.setDeptName("개발팀");
 
-            Employee e1 = em.find(Employee.class, "202301");
-            System.out.println("DB에서 가져옴");
+            System.out.println("비영속 상태");
+            em.persist(dept);      // IDENTITY 전략은 em.persist() 시점에 즉시 INSERT SQL 실행하고 DB에서 식별자를 조회
+
             System.out.println("영속 상태");
-
-            System.out.println("수정 전 ==> ");
-            e1.setDepartment(null);
-
-            em.persist(e1);
-            System.out.println("수정 후 ==> ");
-            em.flush();
-            System.out.println("flush 직접 호출 ==> ");
-            System.out.println("커밋 전 ==> ");
+            em.find(Department.class, dept.getDeptId());
+            System.out.println("1차 캐시에서 가져옴");
+            System.out.println("====== 커밋 전 ======");
             tx.commit();
-            System.out.println("커밋 후 ==> ");
-
-            Employee e2 = em.find(Employee.class, "202301");
-            System.out.println("e1 == e2 ? "+(e1 == e2));
+            System.out.println("====== 커밋 후 ======");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             tx.rollback();
